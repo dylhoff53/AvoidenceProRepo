@@ -7,6 +7,7 @@ public class Wade : Kinematic
     Wander myMoveType;
     Face mySeekRotateType;
     LookWhereGoing myFleeRotateType;
+    public PlayerController player;
 
     public bool flee = false;
 
@@ -30,10 +31,14 @@ public class Wade : Kinematic
     // Update is called once per frame
     protected override void Update()
     {
-        steeringUpdate = new SteeringOutput();
-        steeringUpdate.linear = myMoveType.getSteering().linear;
-        steeringUpdate.angular = flee ? myFleeRotateType.getSteering().angular : mySeekRotateType.getSteering().angular;
-        base.Update();
+        if(player.gameStart == true)
+        {
+            steeringUpdate = new SteeringOutput();
+            steeringUpdate.linear = myMoveType.getSteering().linear;
+            steeringUpdate.angular = flee ? myFleeRotateType.getSteering().angular : mySeekRotateType.getSteering().angular;
+            steeringUpdate.linear.y = 0;
+            base.Update();
+        }
     }
 
 }

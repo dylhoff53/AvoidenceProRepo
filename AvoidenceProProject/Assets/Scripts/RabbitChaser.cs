@@ -6,6 +6,7 @@ public class RabbitChaser : Kinematic
 {
     FollowPath myMoveType;
     LookWhereGoing myRotateType;
+    public PlayerController player;
 
     public GameObject[] myPath = new GameObject[4];
 
@@ -25,9 +26,13 @@ public class RabbitChaser : Kinematic
     // Update is called once per frame
     protected override void Update()
     {
-        steeringUpdate = new SteeringOutput();
-        steeringUpdate.angular = myRotateType.getSteering().angular;
-        steeringUpdate.linear = myMoveType.getSteering().linear;
-        base.Update();
+        if(player.gameStart == true)
+        {
+            steeringUpdate = new SteeringOutput();
+            steeringUpdate.angular = myRotateType.getSteering().angular;
+            steeringUpdate.linear = myMoveType.getSteering().linear;
+            steeringUpdate.linear.y = 0;
+            base.Update();
+        }
     }
 }
