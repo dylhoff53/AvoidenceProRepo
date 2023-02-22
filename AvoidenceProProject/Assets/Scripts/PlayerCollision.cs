@@ -36,6 +36,11 @@ public class PlayerCollision : MonoBehaviour
             playerNum.score += 50;
             playerNum.moveSpeed += 2;
             player.transform.localScale = new Vector3(player.transform.localScale.x + 5f, player.transform.localScale.y + 5f, player.transform.localScale.z + 5f);
+        } else if (collisionInfo.collider.tag == "bird")
+        {
+            Destroy(collisionInfo.gameObject);
+            playerNum.score += 1;
+            player.transform.localScale = new Vector3(player.transform.localScale.x + .1f, player.transform.localScale.y + .1f, player.transform.localScale.z + .1f);
         }
     }
 }
